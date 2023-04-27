@@ -32,16 +32,24 @@ class NoteCreator(db_note_saver):
                 persid = crs.execute(
                     f"SELECT ID FROM {personsTableName} WHERE FULLNAME='{tmp['header']}'")
                 persid = crs.fetchone()
+                if persid is None:
+                    print(f"no {tmp['topic'].name} {tmp['header']} in base")
+                    continue
                 extractedId = crs.execute(
                     f"SELECT ID FROM {REFS[tbl]} WHERE ID={persid[0]}")
 
-            extractedId = crs.fetchone()[0]
-            buffer = (
-                extractedId,
-                date(date.today().year, date.today().month, date.today().day),
-                note.sqlize()['content'])
-            crs.execute(
-                f"INSERT INTO {tbl}(header,today,content) VALUES(?,?,?) ", buffer)
+            extractedId = crs.fetchone()
+            if extractedId is None:
+                print(f"No such {tmp['topic'].name}: {tmp['header']}")
+                pass
+            else:
+                extractedId=extractedId[0]
+                buffer = (
+                    extractedId,
+                    date(date.today().year, date.today().month, date.today().day),
+                    note.sqlize()['content'])
+                crs.execute(
+                    f"INSERT INTO {tbl}(header,today,content) VALUES(?,?,?) ", buffer)
         return self.__db
 
 
