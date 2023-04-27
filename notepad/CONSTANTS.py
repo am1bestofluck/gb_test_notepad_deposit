@@ -6,6 +6,8 @@ BASEPATH = Path("./notepad/db/db_taxi.sql") if\
 
 DRIVERNOTES="notes_drv"
 CARNOTES="notes_car"
+REFS={DRIVERNOTES:"drivers",CARNOTES:"cars"}
+NOTELIMIT=300
 
 def main():
     print(BASEPATH)

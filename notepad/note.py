@@ -1,6 +1,6 @@
 from datetime import date
 from mainTopics import MainTopics
-
+from CONSTANTS import NOTELIMIT
 
 class Note():
 
@@ -9,13 +9,13 @@ class Note():
         self.__topic = topic if topic is not None else (
             MainTopics.car if input("1 for \"car\", other for driver")=="1" 
             else MainTopics.driver)
-        self.__header = header if header is not None\
+        self.__header = header.upper() if header is not None\
             else input(
             f'''{"Input car goverment number" if self.__topic
             == MainTopics.car else "Input driver name surname"}'''
             .upper())
-        self.__content = content if content is not None\
-            else input("Write down the note please.")
+        self.__content = content[:NOTELIMIT] if content is not None\
+    else input(f"Write down the note please. Less then {str(NOTELIMIT)} characters!")[:NOTELIMIT]
         self.__date = date(date.today().year,
                            date.today().month,
                            date.today().day)
@@ -31,7 +31,7 @@ class Note():
                 "content":self.__content}
     
 def main():
-    a = Note(MainTopics.car,"MLD 572","26-ого напечатал расторжение")
+    a = Note(MainTopics.car,"LCK 777","26-ого напечатал расторжение")
     print(a)
     print(a.sqlize())
 

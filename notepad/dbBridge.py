@@ -1,7 +1,7 @@
 from sqlite3 import Connection,Cursor,OperationalError
 
 from interface import dbMain
-from CONSTANTS import BASEPATH,CARNOTES,DRIVERNOTES
+from CONSTANTS import BASEPATH,CARNOTES,DRIVERNOTES,REFS,NOTELIMIT
 class DbBridge(dbMain):
     
     def __init__(self):
@@ -23,15 +23,15 @@ class DbBridge(dbMain):
                     "id integer primary key AUTOINCREMENT"
                     , "header integer"
                     , "today DATE"
-                    , "content varchar(300) NOT NULL"
-                    , "FOREIGN KEY (header) REFERENCES cars(ID)"])\
+                    , f"content varchar({str(NOTELIMIT)}) NOT NULL"
+                    , f"FOREIGN KEY (header) REFERENCES {REFS[CARNOTES]}(ID)"])\
                     .strip(separator)+");")
         crs.execute(f"CREATE TABLE {DRIVERNOTES} (" +separator.join([
                     "id integer primary key AUTOINCREMENT"
                     , "header integer"
                     , "today DATE"
-                    , "content varchar(300) NOT NULL"
-                    , "FOREIGN KEY (header) REFERENCES persons(ID)"])\
+                    , f"content varchar({str(NOTELIMIT)}) NOT NULL"
+                    , f"FOREIGN KEY (header) REFERENCES {REFS[DRIVERNOTES]}(ID)"])\
                     .strip(separator)+");")
             
         base.commit()

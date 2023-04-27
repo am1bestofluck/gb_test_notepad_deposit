@@ -24,7 +24,7 @@ class db_note_tweaker(ABC):
 class db_note_saver(ABC):
     
     @abstractstaticmethod
-    def save(cls, note:Note, base: Connection):
+    def push(cls, note:Note, base: Connection):
         raise NotImplementedError("for creator")
 
 
