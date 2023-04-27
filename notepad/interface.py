@@ -2,7 +2,7 @@
 Блокнотик v 0.0000001 alpha;
 продолжает тему "кусочка управленческого учёта таксопарка", она же - диплом
 """
-from abc import ABC, abstractmethod, property,abstractstaticmethod
+from abc import ABC, abstractmethod,abstractstaticmethod
 from datetime import date
 from sqlite3 import Connection
 
@@ -50,26 +50,34 @@ class dbMain(ABC):
     def addNote(self,note:Note):
         raise NotImplementedError("fork, based on maintopic")
     
+    @abstractmethod
     def __addCarNote(self,note:Note):
         raise NotImplementedError("TODO")
     
+    @abstractmethod
     def __addDriverNote( self, note:Note):
         raise NotImplementedError("TODO")
     
+    @abstractmethod
     def removeNote(self,topic:MainTopics, noteID: int):
         raise NotImplementedError("fork, based on maintopic")
     
+    @abstractmethod
     def __removeCarNote(self, noteID:int):
         raise NotImplementedError("TODO")
     
+    @abstractmethod
     def __removeDriverNote( self, noteID:int):
         raise NotImplementedError("TODO")
     
+    @abstractmethod
     def editNote(self,topic:MainTopics, noteID: int):
         raise NotImplementedError("fork, based on maintopic")
     
+    @abstractmethod
     def __editCarNote(self, noteID:int):
         raise NotImplementedError("TODO")
     
+    @abstractmethod
     def __editDriverNote(self, noteID:int):
         raise NotImplementedError("TODO")
