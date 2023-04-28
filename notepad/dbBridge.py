@@ -2,6 +2,8 @@ from sqlite3 import Connection,Cursor,OperationalError
 
 from interface import dbMain
 from CONSTANTS import BASEPATH,CARNOTES,DRIVERNOTES,REFS,NOTELIMIT
+import mainTopics
+
 class DbBridge(dbMain):
     
     def __init__(self):
@@ -67,7 +69,8 @@ class DbBridge(dbMain):
     
     def removeNote(self):
         raise NotImplementedError("todo")
-
+    
+    
 def main():
     a = DbBridge()
     a._purge_notepad()

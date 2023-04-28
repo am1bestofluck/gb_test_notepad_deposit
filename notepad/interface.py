@@ -13,12 +13,13 @@ from mainTopics import MainTopics
 class db_note_tweaker(ABC):
     
     @abstractstaticmethod
-    def editNoteContent(cls, base:Connection, noteTopic:MainTopics, noteId:int):
+    def editNoteContent(cls, base:Connection):
         raise NotImplementedError("edit existing note, only content")
     
     @abstractstaticmethod
-    def editNoteHeader(cls, base:Connection, noteTopic:MainTopics, noteId:int):
+    def editNoteHeader(cls, base:Connection):
         raise NotImplementedError("edit existing note, only header")
+    
 
 
 class db_note_saver(ABC):
@@ -33,6 +34,7 @@ class db_note_remover(ABC):
     @abstractstaticmethod
     def remove(self,base: Connection, noteTopic:MainTopics, noteId:int):
         raise NotImplementedError("removes note from table")
+
 
 
 class dbMain(ABC):

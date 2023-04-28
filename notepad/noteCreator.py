@@ -46,7 +46,7 @@ class NoteCreator(db_note_saver):
                 extractedId=extractedId[0]
                 buffer = (
                     extractedId,
-                    date(date.today().year, date.today().month, date.today().day),
+                    tmp['date'],
                     note.sqlize()['content'])
                 crs.execute(
                     f"INSERT INTO {tbl}(header,today,content) VALUES(?,?,?) ", buffer)
