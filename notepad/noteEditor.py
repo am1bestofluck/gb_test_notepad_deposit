@@ -35,22 +35,37 @@ class NoteEditor(db_note_tweaker, Note_selector):
         num=pick[2]
         govpl=pick[3]
         crs = Cursor(self.__base)
-        oldHeader = crs.execute(f"SELECT GOVPL FROM cars WHERE ID='{str(govpl)}'").fetchone()[0]
-        oldText=crs.execute(f"SELECT content FROM {tableName} WHERE id='{num}'").fetchone()[0]
+        
         # oldHeaderId=crs.execute(f"SELECT header FROM {tableName} where id='{num}'").fetchone()[0]
         
-        correctNumber=False
-        while not correctNumber:
-            try:
-                newText=input(f"replace old header({oldHeader}) of {obj} note (\n{oldText}\n)... with new:\n>>> ").upper()
-                newId=crs.execute(f"SELECT ID FROM cars WHERE GOVPL='{newText}'").fetchone()[0]
-                correctNumber=True
-            except AttributeError:
-                print("no such number")
-    
+        if obj == "car":
+            oldHeader = crs.execute(f"SELECT GOVPL FROM cars WHERE ID='{str(govpl)}'").fetchone()[0]
+            oldText=crs.execute(f"SELECT content FROM {tableName} WHERE id='{num}'").fetchone()[0]
+            correctNumber=False
+            while not correctNumber:
+                try:
+                    newText=input(f"replace old header({oldHeader}) of {obj} note (\n{oldText}\n)... with new:\n>>> ").upper()
+                    newId=crs.execute(f"SELECT ID FROM cars WHERE GOVPL='{newText}'").fetchone()[0]
+                    correctNumber=True
+                except AttributeError:
+                    print("no such number")
+        
+            
+        elif obj == "driver":
+            oldHeader = crs.execute(f"SELECT FULLNAME from persons where ID='{govpl}'").fetchone()[0]
+            oldText=crs.execute(f"SELECT content FROM {tableName} WHERE id='{num}'").fetchone()[0]
+            correctNumber=False
+            while not correctNumber:
+                try:
+                    newText=input(f"replace old header({oldHeader}) of {obj} note (\n{oldText}\n)... with new:\n>>> ").upper()
+                    newPersonId=crs.execute(f"SELECT ID FROM persons WHERE FULLNAME='{newText}'").fetchone()[0]
+                    newId=crs.execute(f"SELECT ID from drivers WHERE PERSONID='{newPersonId}'").fetchone()[0]
+                    correctNumber=True
+                except AttributeError:
+                    print("no such driver")
         crs.execute(f"""UPDATE {tableName}
-        SET header='{newId}'
-        WHERE id='{num}';""")
+            SET header='{newId}'
+            WHERE id='{num}';""")
         return self.__base
 
 def main():
