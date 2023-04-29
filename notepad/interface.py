@@ -35,7 +35,15 @@ class db_note_remover(ABC):
     def remove(self,base: Connection, noteTopic:MainTopics, noteId:int):
         raise NotImplementedError("removes note from table")
 
+class db_note_reader(ABC):
 
+    @abstractmethod
+    def readall():
+        raise NotImplementedError("todo")
+    
+    @abstractmethod
+    def readSpecific():
+        raise NotImplementedError("todo")
 
 class dbMain(ABC):
 
@@ -82,4 +90,12 @@ class dbMain(ABC):
     
     @abstractmethod
     def __editDriverNote(self, noteID:int):
+        raise NotImplementedError("TODO")
+    
+    @abstractmethod
+    def readNote(self):
+        raise NotImplementedError("TODO")
+    
+    @abstractmethod
+    def readAllNotes(self):
         raise NotImplementedError("TODO")

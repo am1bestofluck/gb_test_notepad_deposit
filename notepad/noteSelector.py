@@ -10,7 +10,7 @@ class Note_selector():
         self.__base = base
     
     def selectNote(self):
-        print("Now We choose note to edit/remove!")
+        print("Now We choose note to edit/remove/read!")
         topic = mainTopics.MainTopics.car \
             if input("Choose topic, \"1\" for car, else for driver") in \
                 ["1","\"1\""] else mainTopics.MainTopics.driver
@@ -27,7 +27,7 @@ class Note_selector():
             car = crs.execute(f"SELECT header FROM {tableName} where id='{number}'")
             car_o=car.fetchone()
             
-            correctIndex = False if number_ is None else True
+            correctIndex = False if number_o is None else True
             if not correctIndex:
                 print(f"no such noteID in {tableName}")
         return (tableName,topic,number_o[0],car_o[0])# mainTopics.MainTopics.car, number.isdigit(),int

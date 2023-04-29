@@ -15,7 +15,7 @@ class Note():
             else input(
             f'''{"Input car goverment number" if self.__topic
             == MainTopics.car else "Input driver name surname"}'''
-            .upper())
+            ).upper()
         self.__content = content[:NOTELIMIT] if content is not None\
             else input(f"Write down the note please. Less then {str(NOTELIMIT)} characters!")[:NOTELIMIT]
         self.__date = date(date.today().year,
