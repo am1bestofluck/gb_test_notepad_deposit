@@ -1,0 +1,5 @@
+{"roll": "runs lottery once, return description or null", 
+"add": "adds position to prize pool",
+"giveaway":"reports lots which have already been randomized",  
+"prize":"reports lots which are yet in pool",
+"qqq":"Shuts down" }
