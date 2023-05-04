@@ -13,6 +13,7 @@ class Controller{
         Help.main(new String[] {}); // может позже распарсю; вообще странно
         // что нужно что-то докачивать
         Boolean exitCondition=false;
+        Pool prizesPool= new Pool();
         while (!exitCondition) { 
             
             System.out.print("listening...");
@@ -36,21 +37,32 @@ class Controller{
                     break;
                 case "roll":
                     System.out.println("randomize reward");
-                    // TODO
+                    Item test = prizesPool.roll();
+                    if (test != null){
+                        System.out.println(String.format("Got a prize! %s", test.toString()));}
+                    else {
+                        System.out.println("Tough luck...:). Have an uplifting joke!");
+                        System.out.println(Help.RandomJoke());}
+                    
                     break;
                 case "add":
                     System.out.println("add positions to prize pool");
-                    // TODO
+                    Item newItem = new Item();
+                    System.out.println("How much items to add?");
+                    Integer qua = loop.nextInt();
+                    prizesPool.add(newItem,qua);
                     break;
                 case "giveaway":
                     System.out.println("report on lots already out");
-                    // TODO
+                    System.out.println(prizesPool.giveaway());
                     break;
                 case "prize":
                     System.out.println("report on lots in pool yet");
-                    // TODO
+                    System.out.println(prizesPool.prize());
                     break;
                 default:
                     break;
-            }}}
-}
+                    }
+                }
+            }
+    }
